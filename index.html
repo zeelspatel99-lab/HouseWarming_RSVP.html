@@ -254,11 +254,50 @@ body{
 
 </div><!-- /card -->
 <script>
-function doSubmit(){
-  if(!document.getElementById('fn').value.trim()){alert('Please enter your name.');return;}
-  if(!document.querySelector('input[name="att"]:checked')){alert('Please indicate if you will be attending.');return;}
-  document.getElementById('formBlock').classList.add('gone');
-  document.getElementById('successBlock').classList.add('show');
+function doSubmit() {
+
+  const name = document.getElementById('fn').value.trim();
+
+  if (!name) {
+    alert('Please enter your name.');
+    return;
+  }
+
+  const attendingOption = document.querySelector('input[name="att"]:checked');
+
+  if (!attendingOption) {
+    alert('Please indicate if you will be attending.');
+    return;
+  }
+
+  const data = {
+    name: document.getElementById('fn').value,
+    phone: document.getElementById('phone') ? document.getElementById('phone').value : '',
+    guests: document.getElementById('guests') ? document.getElementById('guests').value : '',
+    attending: attendingOption.value,
+    message: document.getElementById('msg') ? document.getElementById('msg').value : ''
+  };
+
+  fetch('https://script.google.com/macros/s/AKfycbzPJ_vlDcTqwoc-nD8k9Cx44HMDNTLvphXzkvrr_t68LcycUDs7n6ewW9iSms95LqNTNw/exec', {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(result => {
+
+    document.getElementById('formBlock').classList.add('gone');
+    document.getElementById('successBlock').classList.add('show');
+
+  })
+  .catch(error => {
+    console.error(error);
+    alert('There was a problem submitting your RSVP. Please try again.');
+  });
+
 }
 </script>
 </body>
