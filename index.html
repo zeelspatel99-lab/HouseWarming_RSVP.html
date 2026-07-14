@@ -27,7 +27,8 @@ body{
 .hero{position:relative;display:block;background:#f9f0dc;}
 .hero img{width:100%;height:auto;display:block;}
 .hero-fade{
-  height:70px;margin-top:-70px;
+  height:12px;
+  margin-top:-12px;
   background:linear-gradient(0deg,#fdf6e8 0%,transparent 100%);
   position:relative;z-index:1;
 }
@@ -35,15 +36,19 @@ body{
 /* ── FORM PANEL ── */
 .panel{
   background:#fdf6e8;
-  padding:4px 30px 44px;
+  padding:0 26px 44px;
 }
 
 /* Arch / Mughal frame for the form */
 .form-frame{
+  margin-top:-46px;
+  position:relative;
+  z-index:3;
   border:1.5px solid rgba(185,138,30,0.40);
-  border-radius:60% 60% 10px 10px / 30px 30px 10px 10px;
-  padding:28px 24px 28px;
-  background:rgba(255,252,245,0.70);
+  border-radius:60% 60% 12px 12px / 42px 42px 12px 12px;
+  padding:18px 24px 28px;
+  background:rgba(255,252,245,0.92);
+  box-shadow:0 -6px 20px rgba(180,140,40,.08),0 12px 28px rgba(90,50,0,.08);
   position:relative;
 }
 .form-frame::before{
