@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Housewarming – Patel Family RSVP</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Great+Vibes&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:'Jost',sans-serif;
+  background:linear-gradient(150deg,#ecdbb8 0%,#f5e8ce 55%,#e8d8b0 100%);
+  min-height:100vh;
+  display:flex;justify-content:center;align-items:flex-start;
+  padding:24px 14px 48px;
+}
+
+.card{
+  width:100%;max-width:520px;
+  border-radius:6px;
+  overflow:hidden;
+  box-shadow:0 16px 60px rgba(90,50,0,0.22),0 2px 8px rgba(90,50,0,0.10);
+}
+
+/* ── HERO ── */
+.hero{position:relative;display:block;background:#f9f0dc;}
+.hero img{width:100%;height:auto;display:block;}
+.hero-fade{
+  height:12px;
+  margin-top:-12px;
+  background:linear-gradient(0deg,#fdf6e8 0%,transparent 100%);
+  position:relative;z-index:1;
+}
+
+/* ── FORM PANEL ── */
+.panel{
+  background:#fdf6e8;
+  padding:0 26px 44px;
+}
+
+/* Arch / Mughal frame for the form */
+.form-frame{
+  margin-top:-46px;
+  position:relative;
+  z-index:3;
+  border:1.5px solid rgba(185,138,30,0.40);
+  border-radius:60% 60% 12px 12px / 42px 42px 12px 12px;
+  padding:18px 24px 28px;
+  background:rgba(255,252,245,0.92);
+  box-shadow:0 -6px 20px rgba(180,140,40,.08),0 12px 28px rgba(90,50,0,.08);
+  position:relative;
+}
+.form-frame::before{
+  content:'';
+  position:absolute;inset:5px;
+  border:0.5px solid rgba(185,138,30,0.20);
+  border-radius:58% 58% 8px 8px / 28px 28px 8px 8px;
+  pointer-events:none;
+}
+
+/* Lotus ornament top of frame */
+.lotus{
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:14px;
+}
+.lotus::before,.lotus::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(185,138,30,0.5),transparent);
+}
+.lotus span{font-size:20px;color:#c9972e;}
+
+.form-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;font-weight:700;
+  letter-spacing:4px;text-transform:uppercase;
+  color:#3e2604;text-align:center;margin-bottom:4px;
+}
+.form-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:14px;
+  color:#7a5215;text-align:center;
+  line-height:1.55;margin-bottom:20px;
+}
+
+/* Divider */
+.div{display:flex;align-items:center;gap:8px;margin:16px 0;}
+.div::before,.div::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(185,138,30,0.4),transparent);}
+.div span{font-size:13px;color:#c9972e;opacity:0.7;}
+
+/* Fields */
+.row{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:11px;}
+.fld{margin-bottom:11px;}
+.lbl{
+  display:block;font-size:10px;font-weight:600;
+  letter-spacing:1.8px;text-transform:uppercase;
+  color:#7a5215;margin-bottom:5px;
+}
+.inp{
+  width:100%;padding:11px 13px;
+  border:1px solid rgba(185,138,30,0.38);
+  border-radius:8px;
+  background:rgba(255,255,255,0.72);
+  font-family:'Jost',sans-serif;font-size:14px;color:#3e2604;
+  outline:none;
+  transition:border-color .2s,background .2s,box-shadow .2s;
+  -webkit-appearance:none;
+}
+.inp:focus{border-color:#c9972e;background:#fff;box-shadow:0 0 0 3px rgba(201,151,46,0.12);}
+.inp::placeholder{color:#c4a870;}
+
+/* Radio attend cards */
+.attend{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:11px;}
+.rc{cursor:pointer;position:relative;}
+.rc input{position:absolute;opacity:0;width:0;height:0;}
+.rf{
+  display:flex;flex-direction:column;align-items:center;
+  padding:14px 8px;gap:5px;
+  border:1.5px solid rgba(185,138,30,0.30);
+  border-radius:9px;background:rgba(255,255,255,0.50);
+  transition:all .18s;
+}
+.ri{font-size:24px;}
+.rt{font-size:12px;font-weight:500;color:#7a5215;text-align:center;line-height:1.3;}
+.rc input:checked+.rf{
+  border-color:#c9972e;background:rgba(201,151,46,0.09);
+  box-shadow:0 0 0 2px rgba(201,151,46,0.18);
+}
+.rc input:checked+.rf .rt{color:#3e2604;}
+
+/* Submit */
+.btn{
+  width:100%;padding:14px 20px;
+  background:linear-gradient(135deg,#2c4a2e 0%,#1a3a1c 100%);
+  border:none;border-radius:9px;
+  font-family:'Jost',sans-serif;font-size:12px;
+  font-weight:600;letter-spacing:3px;text-transform:uppercase;
+  color:#fff8ee;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  margin-top:6px;
+  transition:opacity .2s,transform .12s;
+}
+.btn:hover{opacity:.9;}
+.btn:active{transform:scale(.99);}
+
+/* Footer */
+.foot{text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid rgba(185,138,30,0.20);}
+.deadline{
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:#7a5215;margin-bottom:8px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.deadline::before,.deadline::after{content:'';display:inline-block;width:24px;height:1px;background:rgba(185,138,30,0.45);}
+.fname{font-family:'Great Vibes',cursive;font-size:32px;color:#3e2604;line-height:1.2;}
+
+/* Success */
+.success{display:none;text-align:center;padding:36px 8px;}
+.success.show{display:block;}
+.s-ico{font-size:52px;margin-bottom:14px;}
+.s-h{font-family:'Great Vibes',cursive;font-size:44px;color:#3e2604;margin-bottom:10px;}
+.s-p{font-size:15px;color:#7a5215;line-height:1.85;}
+.s-p em{color:#c9972e;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:17px;}
+.gone{display:none!important;}
+
+@media(max-width:440px){
+  .panel{padding:4px 18px 36px;}
+  .form-frame{padding:22px 16px 22px;}
+  .form-title{font-size:23px;}
+  .row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="card">
+
+  <!-- Hero: invite image cropped to decorative top (Ganesha + title + date/time/venue + rituals) -->
+  <div class="hero">
+    <img src="housewarming_invite.png" alt="Housewarming Invitation">
+    <div class="hero-fade"></div>
+  </div>
+
+  <!-- Form panel -->
+  <div class="panel">
+    <div class="form-frame">
+
+      <div class="lotus"><span>✿</span></div>
+      <h2 class="form-title">Kindly RSVP</h2>
+      <p class="form-sub">We would love to have your presence<br>and blessings on our special day.</p>
+
+      <div id="formBlock">
+
+        <div class="row">
+          <div>
+            <label class="lbl" for="fn">Full Name</label>
+            <input class="inp" id="fn" type="text" placeholder="Your name">
+          </div>
+          <div>
+            <label class="lbl" for="ph">Phone / WhatsApp</label>
+            <input class="inp" id="ph" type="tel" placeholder="+1 (___) ___-____">
+          </div>
+        </div>
+
+        <div class="fld">
+          <label class="lbl" for="gs">Number of Guests</label>
+          <select class="inp" id="gs">
+            <option value="">Select…</option>
+            <option>1</option><option>2</option><option>3</option>
+            <option>4</option><option>5</option><option>6+</option>
+          </select>
+        </div>
+
+        <div class="fld">
+          <label class="lbl">Will you be attending?</label>
+          <div class="attend">
+            <label class="rc">
+              <input type="radio" name="att" value="yes">
+              <div class="rf"><span class="ri">🙏</span><span class="rt">Joyfully Attending</span></div>
+            </label>
+            <label class="rc">
+              <input type="radio" name="att" value="no">
+              <div class="rf"><span class="ri">💐</span><span class="rt">Unable to Attend</span></div>
+            </label>
+          </div>
+        </div>
+
+        <div class="fld">
+          <label class="lbl" for="mg">A Blessing or Message</label>
+          <textarea class="inp" id="mg" rows="3"
+            placeholder="Share your blessings for the family's new home…"
+            style="resize:none;font-family:'Jost',sans-serif;line-height:1.55;"></textarea>
+        </div>
+
+        <button class="btn" onclick="doSubmit()">
+          <span>✉</span> Submit RSVP
+        </button>
+
+        <div class="foot">
+          <p class="deadline">Please RSVP by August 1st, 2026</p>
+          <p class="fname">Upen &amp; Neema Patel Family</p>
+        </div>
+
+      </div><!-- /formBlock -->
+
+      <!-- Success -->
+      <div class="success" id="successBlock">
+        <div class="s-ico">🪔</div>
+        <h2 class="s-h">Dhanyavaad!</h2>
+        <p class="s-p">
+          Your RSVP has been received with warm gratitude.<br>
+          The Patel family looks forward to celebrating with you.<br><br>
+          <em>August 20th, 2026 &nbsp;·&nbsp; 4:00 PM<br>
+          38 Trinity Road, Rocky View County, AB</em>
+        </p>
+      </div>
+
+    </div><!-- /form-frame -->
+  </div><!-- /panel -->
+
+</div><!-- /card -->
+<script>
+function doSubmit() {
+  const name = document.getElementById('fn').value.trim();
+  const attendingOption = document.querySelector('input[name="att"]:checked');
+
+  if (!name) {
+    alert('Please enter your name.');
+    return;
+  }
+
+  if (!attendingOption) {
+    alert('Please indicate if you will be attending.');
+    return;
+  }
+
+  const data = {
+    name: document.getElementById('fn').value,
+    phone: document.getElementById('ph').value,
+    guests: document.getElementById('gs').value,
+    attending: attendingOption.value,
+    message: document.getElementById('mg').value
+  };
+
+  fetch('https://script.google.com/macros/s/AKfycbxUVMKLcaVpLqxQ0ssV7guA-B5AGnybCMFi4-wYTehWxQnHL36ygPB1S3txlmfxjNAlsg/exec', {
+    method: 'POST',
+    body: JSON.stringify(data)
+  })
+  .then(response => response.text())
+  .then(result => {
+    document.getElementById('formBlock').classList.add('gone');
+    document.getElementById('successBlock').classList.add('show');
+  })
+  .catch(error => {
+    alert('There was a problem submitting your RSVP. Please try again.');
+  });
+}
+</script>
+</body>
+</html>
